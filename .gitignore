@@ -1,0 +1,4 @@
+# Excludes mac hidden files if yours are visible
+.DS_Store
+node_modules
+
