@@ -9,7 +9,8 @@ var gulp = require('gulp'),
 
 gulp.task('serve', function(){
 	browserSync.init({
-		server: './dist'	
+		//server: './dist'	
+		proxy: 'localhost:8080/dist/'
 	});
 	
 	gulp.watch('build/css/*.sass', ['sass']);
@@ -20,7 +21,6 @@ gulp.task('serve', function(){
 gulp.task('js', function(){
 	return gulp.src('build/js/*.js')
 		.pipe(jshint())
-		// don't forget to npm the jshint-stylish
 		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(uglifyJs())
 		.pipe(gulp.dest('dist/js'))

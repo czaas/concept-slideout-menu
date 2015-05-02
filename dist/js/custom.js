@@ -1,1 +1,1 @@
-function hello(){return"jello"}
+$(".menuIcon").on("click",function(){$(".menuSlide").toggleClass("on")});
