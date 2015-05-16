@@ -5,14 +5,17 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	minifyHtml = require('gulp-minify-html'),
 	browserSync = require('browser-sync'),
-	reload = browserSync.reload;
+	reload = browserSync.reload,
+	prefixer = require('gulp-autoprefixer');
 
 gulp.task('serve', function(){
 	browserSync.init({
-		//server: './dist'	
-		proxy: 'localhost:8080/dist/'
+		server: './dist',
+		port: 3000
+
+		//proxy: 'localhost:8080/dist/'
 	});
-	
+
 	gulp.watch('build/css/*.sass', ['sass']);
 	gulp.watch('build/js/*.js', ['js']);
 	gulp.watch('build/*.html', ['html']);
@@ -30,6 +33,10 @@ gulp.task('js', function(){
 gulp.task('sass', function(){
 	return gulp.src('build/css/*.sass')
 		.pipe(sass({indentedSyntax: true}))
+		.pipe(prefixer({
+			browsers: ['last 2 versions'],
+			cascade: false
+		}))
 		.pipe(minifyCss())
 		.pipe(gulp.dest('dist/css'))
 		.pipe(reload({stream: true}));
